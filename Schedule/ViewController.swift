@@ -75,7 +75,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             cell.textLabel.text = weekArray[indexPath.row]
         } else {
             cell.textLabel.text = dateManager.conversionDateFormat(indexPath)
-            //月によって1日の場所は異なる(後ほど説明します)
+            //月によって1日の場所は異なる
         }
         return cell
     }
@@ -92,6 +92,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //セル選択時
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print(indexPath.row)
+        _ = UIApplication.sharedApplication().delegate as! AppDelegate
+        //appDelegate. = [indexPath.row]
+        
+        let pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ShosaiViewController") as! ShosaiViewController
+        self.navigationController?.pushViewController(pageViewController, animated: true)
     }
     
     //セルの垂直方向のマージンを設定

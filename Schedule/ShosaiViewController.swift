@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -14,15 +15,32 @@ class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var table: UITableView!
     @IBOutlet weak var tableView: UITableView!
     
-    var tasks:[Task] = [Task]()
-        
+    var databaseRef:FIRDatabaseReference!
+    
+    
+    
+    var tasks:[Task] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //テーブルビューのデータソースメソッドはViewControllerクラスに書くという設定
-        table.dataSource = self
         
-        self.setupTasks()
+        self.table.dataSource = self
+        self.table.delegate = self
         
+        
+        databaseRef = FIRDatabase.database().reference()
+        databaseRef.observeEventType(.ChildAdded, withBlock: { snapshot in
+            if let name = snapshot.value!.objectForKey("name") as? String,
+                time = snapshot.value!.objectForKey("time") as? String,
+                yotei = snapshot.value!.objectForKey("yotei") as? String{
+                    let task = Task(name: name, time: time, yotei: yotei)
+                    self.tasks.append(task)
+                    self.tableView.reloadData()
+            }
+        })
+        
+        //self.tableView.registerNib(UINib(nibName: "CustomCell", bundle: nil), forCellReuseIdentifier: "cellA")
         //self.tableView.delegate = self
         //self.tableView.dataSource = self
     }
@@ -32,10 +50,6 @@ class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    func setupTasks() {
-        
-    }
-    
     // セクション数
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -43,22 +57,24 @@ class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //セルの数を指定
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tasks.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomCell
+        //let cell = tableView.dequeueReusableCellWithIdentifier("cellA", forIndexPath: indexPath) as! CustomCell
         
-        cell.yotei.text = "バイト"
-        cell.time.text = "17:00"
-        cell.name.text = "みのり"
+        let cell = tableView.dequeueReusableCellWithIdentifier("cellA", forIndexPath: indexPath)
+        cell.detailTextLabel?.text = tasks[indexPath.row].yotei
+        cell.textLabel?.text = tasks[indexPath.row].name
+        /*cell.yotei.text = tasks[indexPath.row].yotei
+        cell.time.text = tasks[indexPath.row].time
+        cell.name.text = tasks[indexPath.row].name
+        print(tasks[indexPath.row].yotei)*/
         return cell
     }
     
-    @IBAction func back(sender: UIButton) {
-        print("back")
-    }
-
+    
+    
     
 }
