@@ -10,11 +10,13 @@ import Foundation
 
 class Task {
     var name:String
+    var date:String
     var time:String
     var yotei:String
     
-    init(name: String, time: String, yotei: String){
+    init(name: String, date: String, time: String, yotei: String){
         self.name = name
+        self.date = date
         self.time = time
         self.yotei = yotei
     }

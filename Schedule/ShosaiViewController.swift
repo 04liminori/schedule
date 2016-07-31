@@ -17,14 +17,10 @@ class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var databaseRef:FIRDatabaseReference!
     
-    
-    
     var tasks:[Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //テーブルビューのデータソースメソッドはViewControllerクラスに書くという設定
-        
         self.table.dataSource = self
         self.table.delegate = self
         
@@ -32,17 +28,22 @@ class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDa
         databaseRef = FIRDatabase.database().reference()
         databaseRef.observeEventType(.ChildAdded, withBlock: { snapshot in
             if let name = snapshot.value!.objectForKey("name") as? String,
+                date = snapshot.value!.objectForKey("date") as? String,
                 time = snapshot.value!.objectForKey("time") as? String,
                 yotei = snapshot.value!.objectForKey("yotei") as? String{
-                    let task = Task(name: name, time: time, yotei: yotei)
+                    
+                    let task = Task(name: name, date: date, time: time, yotei: yotei)
                     self.tasks.append(task)
+                    
+                    
                     self.tableView.reloadData()
             }
         })
         
-        //self.tableView.registerNib(UINib(nibName: "CustomCell", bundle: nil), forCellReuseIdentifier: "cellA")
-        //self.tableView.delegate = self
-        //self.tableView.dataSource = self
+        //選んだセルの日付とtaskの中のdateが同じTaskだけを表示
+        //if seletedDate = Task.date {
+            
+        //}
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,19 +63,13 @@ class ShosaiViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         
-        //let cell = tableView.dequeueReusableCellWithIdentifier("cellA", forIndexPath: indexPath) as! CustomCell
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("cellA", forIndexPath: indexPath)
-        cell.detailTextLabel?.text = tasks[indexPath.row].yotei
-        cell.textLabel?.text = tasks[indexPath.row].name
-        /*cell.yotei.text = tasks[indexPath.row].yotei
-        cell.time.text = tasks[indexPath.row].time
+        let cell = tableView.dequeueReusableCellWithIdentifier("cellA", forIndexPath: indexPath) as! CustomCell
+
         cell.name.text = tasks[indexPath.row].name
-        print(tasks[indexPath.row].yotei)*/
+        cell.time.text = String(tasks[indexPath.row].time)
+        cell.yotei.text = tasks[indexPath.row].yotei
         return cell
+    
     }
-    
-    
-    
     
 }

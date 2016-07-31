@@ -91,10 +91,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     //セル選択時
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
         _ = UIApplication.sharedApplication().delegate as! AppDelegate
         //appDelegate. = [indexPath.row]
-        
+        print(selectedDate)
+        print(dateManager.conversionDateFormat(indexPath))
+       
         let pageViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ShosaiViewController") as! ShosaiViewController
         self.navigationController?.pushViewController(pageViewController, animated: true)
     }

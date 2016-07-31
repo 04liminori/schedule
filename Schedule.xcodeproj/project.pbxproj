@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		421725861D1E611600ACCA79 /* TuikaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421725851D1E611600ACCA79 /* TuikaViewController.swift */; };
 		421725881D1E9CC400ACCA79 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421725871D1E9CC400ACCA79 /* GoogleService-Info.plist */; };
-		42AAB5B91D4C910C00CCF819 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42AAB5B81D4C910C00CCF819 /* CustomCell.xib */; };
 		42AF39BD1D0989B900D26DC1 /* CalenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AF39BC1D0989B900D26DC1 /* CalenderCell.swift */; };
 		42AF39BF1D0BF12F00D26DC1 /* ShosaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AF39BE1D0BF12F00D26DC1 /* ShosaiViewController.swift */; };
 		42AF39C11D0BFDB900D26DC1 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AF39C01D0BFDB900D26DC1 /* CustomCell.swift */; };
@@ -43,7 +42,6 @@
 		389359009BB2086643DC9F57 /* Pods_Schedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		421725851D1E611600ACCA79 /* TuikaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuikaViewController.swift; sourceTree = "<group>"; };
 		421725871D1E9CC400ACCA79 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		42AAB5B81D4C910C00CCF819 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		42AF39BC1D0989B900D26DC1 /* CalenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderCell.swift; sourceTree = "<group>"; };
 		42AF39BE1D0BF12F00D26DC1 /* ShosaiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShosaiViewController.swift; sourceTree = "<group>"; };
 		42AF39C01D0BFDB900D26DC1 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				42AF39C01D0BFDB900D26DC1 /* CustomCell.swift */,
 				421725851D1E611600ACCA79 /* TuikaViewController.swift */,
 				42D5C6541CCCA702005D8367 /* Main.storyboard */,
-				42AAB5B81D4C910C00CCF819 /* CustomCell.xib */,
 				42D5C6571CCCA702005D8367 /* Assets.xcassets */,
 				42D5C65C1CCCA702005D8367 /* Info.plist */,
 				421725871D1E9CC400ACCA79 /* GoogleService-Info.plist */,
@@ -256,7 +253,6 @@
 			files = (
 				42D5C6581CCCA702005D8367 /* Assets.xcassets in Resources */,
 				42D5C6561CCCA702005D8367 /* Main.storyboard in Resources */,
-				42AAB5B91D4C910C00CCF819 /* CustomCell.xib in Resources */,
 				421725881D1E9CC400ACCA79 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class TuikaViewController: UIViewController {
+class TuikaViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet var textField: UITextField!
     @IBOutlet weak var lbDate: UIDatePicker!
@@ -22,7 +22,13 @@ class TuikaViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         databaseRef = FIRDatabase.database().reference()
+        textField.delegate = self
         
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,22 +37,28 @@ class TuikaViewController: UIViewController {
         textField.text = saveDate.objectForKey("yotei") as! String?
     }
     
-    // デートピッカー値変更時
-    @IBAction func changeDate(sender: UIDatePicker) {
-        
-        date = String(sender.date)
-    }
     
     @IBAction func save() {
         //let task = Task(name: "みのり", time: self.date!, yotei: self.textField.text!)
-        let task = Task(name: "みのり", time: "15:00", yotei: "ああああああ")
-        let taskPost = ["name": task.name, "time": task.time, "yotei": task.yotei]
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH時mm分"
+        let formattedDate = dateFormatter.stringFromDate(lbDate.date)
+        
+        let dateFormatter2 = NSDateFormatter()
+        dateFormatter2.dateFormat = "yyyy年MM月dd日"
+        let formattedDate2 = dateFormatter2.stringFromDate(lbDate.date)
+
+        
+        
+        let task = Task(name: "みのり", date: formattedDate2 , time: formattedDate, yotei: textField.text!)
+        let taskPost = ["name": task.name, "date": task.date, "time": task.time, "yotei": task.yotei]
         databaseRef.childByAutoId().setValue(taskPost)
+        //print(task.name)
         
         textField.resignFirstResponder()
         
         
-        //アラート出すよ
+        //完了アラート
         let alert:UIAlertController = UIAlertController(title: "保存完了！", message: "予定を追加しました。", preferredStyle: .Alert)
         
         //okボタン
